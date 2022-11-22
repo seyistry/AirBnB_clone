@@ -25,7 +25,7 @@ class BaseModel:
         Returns:
                 str: return formatted string
         """
-        return f"[BaseModel] ({self.id}) {self.__dict__}"
+        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Method that update `update_at` of object
@@ -40,7 +40,7 @@ class BaseModel:
             dict: return dict with formatted values
         """
         new_dict = self.__dict__
-        new_dict["__class__"] = "BaseModel"
+        new_dict["__class__"] = __class__.__name__
         new_dict["created_at"] = new_dict["created_at"].strftime(
             "%Y-%m-%dT%H:%M:%S.%f")
         new_dict["updated_at"] = new_dict["updated_at"].strftime(
