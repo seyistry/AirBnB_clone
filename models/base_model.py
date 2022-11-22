@@ -8,11 +8,16 @@ from datetime import datetime
 class BaseModel:
     """A base model for AirBnB clone"""
 
-    def __init__(self):
-        """Initialize object"""
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """Initialize object and check keyword argument"""
+
+        self.id = kwargs["id"] if "id" in kwargs else str(uuid4())
+        self.created_at = datetime.strptime(
+            kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f") \
+            if "created_at" in kwargs else datetime.now()
+        self.updated_at = datetime.strptime(
+            kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f") \
+            if "updated_at" in kwargs else datetime.now()
 
     def __str__(self):
         """BaseModel string
@@ -28,7 +33,7 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        """method that format created_at, 
+        """method that format created_at,
            updated_at and add new key __class__
 
         Returns:
