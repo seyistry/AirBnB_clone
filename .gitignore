@@ -1,0 +1,7 @@
+# ignore __pycache__ folder
+
+*/__pycache__
+
+# ignore base test in root folder
+
+/*.py
