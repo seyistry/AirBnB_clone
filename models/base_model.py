@@ -3,6 +3,9 @@
 
 from uuid import uuid4
 from datetime import datetime
+import models
+
+dateFormat = "%Y-%m-%dT%H:%M:%S.%f"
 
 
 class BaseModel:
@@ -11,13 +14,21 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialize object and check keyword argument"""
 
-        self.id = kwargs["id"] if "id" in kwargs else str(uuid4())
-        self.created_at = datetime.strptime(
-            kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f") \
-            if "created_at" in kwargs else datetime.now()
-        self.updated_at = datetime.strptime(
-            kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f") \
-            if "updated_at" in kwargs else datetime.now()
+        if "created_at" in kwargs:
+            self.created_at = datetime.strptime(
+                kwargs["created_at"], dateFormat)
+        else:
+            self.created_at = datetime.now()
+        if "updated_at" in kwargs:
+            self.updated_at = datetime.strptime(
+                kwargs["updated_at"], dateFormat)
+        else:
+            self.updated_at = self.created_at
+        if "id" in kwargs:
+            self.id = kwargs["id"]
+        else:
+            self.id = str(uuid4())
+            models.storage.new(self)
 
     def __str__(self):
         """BaseModel string
@@ -31,6 +42,7 @@ class BaseModel:
         """Method that update `update_at` of object
         """
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """method that format created_at,
@@ -39,10 +51,10 @@ class BaseModel:
         Returns:
             dict: return dict with formatted values
         """
-        new_dict = self.__dict__
+        new_dict = self.__dict__.copy()
         new_dict["__class__"] = __class__.__name__
         new_dict["created_at"] = new_dict["created_at"].strftime(
-            "%Y-%m-%dT%H:%M:%S.%f")
+            dateFormat)
         new_dict["updated_at"] = new_dict["updated_at"].strftime(
-            "%Y-%m-%dT%H:%M:%S.%f")
+            dateFormat)
         return new_dict

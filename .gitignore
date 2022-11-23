@@ -1,7 +1,8 @@
 # ignore __pycache__ folder
 
-*/__pycache__
+**/__pycache__
 
 # ignore base test in root folder
 
 /*.py
+**/*.json
