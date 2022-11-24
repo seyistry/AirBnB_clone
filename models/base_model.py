@@ -36,7 +36,7 @@ class BaseModel:
         Returns:
                 str: return formatted string
         """
-        return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Method that update `update_at` of object
@@ -52,7 +52,7 @@ class BaseModel:
             dict: return dict with formatted values
         """
         new_dict = self.__dict__.copy()
-        new_dict["__class__"] = __class__.__name__
+        new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = new_dict["created_at"].strftime(
             dateFormat)
         new_dict["updated_at"] = new_dict["updated_at"].strftime(
