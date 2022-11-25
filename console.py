@@ -6,6 +6,7 @@
 import cmd
 import json
 import sys
+import re
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -152,6 +153,39 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         else:
             print("** class name missing **")
+
+    def default(self, line):
+        arg = line.split(".")
+        if arg[0] in classes.keys() and len(arg) > 1:
+            # show method
+            shmtd = re.search(r"^show\(\"(.+)\"\)", arg[1])
+            # destroy method
+            demtd = re.search(r"^destroy\(\"(.+)\"\)", arg[1])
+            # update method
+            u_m = re.search(
+                r"^update\(\"([\w-]+).*\"([\w-]+).*\"([\w-]+)\"\)", arg[1])
+            if arg[1] == "all()":
+                self.do_all(arg[0])
+            elif arg[1] == "count()":
+                self.count(arg[0])
+            elif shmtd:
+                self.do_show(f"{arg[0]} {shmtd.group(1)}")
+            elif demtd:
+                self.do_destroy(f"{arg[0]} {demtd.group(1)}")
+            elif u_m:
+                x = f"{arg[0]} {u_m.group(1)} {u_m.group(2)} {u_m.group(3)}"
+                self.do_update(x)
+        else:
+            self.stdout.write('*** Unknown syntax: %s\n' % line)
+
+    def count(self, arg):
+        all_objs = storage.all()
+        count = 0
+        for obj_id in all_objs.keys():
+            obj_class = obj_id.split(".")
+            if obj_class[0] == arg:
+                count += 1
+        print(count)
 
     def do_quit(self, arg):
         'Quit command to exit the program\n'
