@@ -21,7 +21,7 @@ classes = {"BaseModel": BaseModel, "User": User, "State": State,
 
 
 class HBNBCommand(cmd.Cmd):
-    """AirBnB command interprter
+    """AirBnB command interpreter
     """
     prompt = '(hbnb) '
 
