@@ -5,7 +5,6 @@
 
 import cmd
 import json
-import sys
 import re
 from models.base_model import BaseModel
 from models.user import User
@@ -189,14 +188,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         'Quit command to exit the program\n'
-        sys.exit()
+        return True
 
     def do_EOF(self, arg):
         'EOF command to exit the program\n'
-        sys.exit()
+        return True
 
     def emptyline(self):
-        return None
+        """overridden to not do nothing"""
+        pass
 
 
 if __name__ == '__main__':
