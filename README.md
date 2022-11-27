@@ -17,7 +17,7 @@ And the final data diagram looks like this:
 
 # First step and GOAl of this repository: Write a command interpreter to manage your AirBnB objects.
 
-This is the first step towards building the first full web application: the AirBnB clone. This first step is very important because we will use what we build during this project with all other following projects: HTML/CSS templating, database storage, API, front-end integration…
+This is the first step towards building the first full web application: the AirBnB clone. This first step is very important because we will use what we build during this project with all other following projects: HTML/CSS template, database storage, API, front-end integration…
 
 ## What’s a command interpreter?
 
@@ -351,13 +351,13 @@ guillaume@ubuntu:~/AirBnB$
 ---|---|---
 2.0.0|[test_engine](./tests/test_models/test_engine)|Directory where the project tests all the tests for the storage of the program
 2.0.1|[__init__.py](./tests/test_models/__init__.py)|initialization code for the package: files are required to make Python treat the directories as containing packages; this is done to prevent directories with a common name
-2.0.2|[test_amenity.py](./tests/test_models/test_amenity.py)|Testing Amenity class- Comproving expectect outputs and documentation
-2.0.3|[test_base_model.py](./tests/test_models/test_base_model.py)|Testing BaseModel- Comproving expectect outputs and documentation
-2.0.4|[test_city.py](./tests/test_models/test_city.py)|Test City Class - Comproving expectect outputs and documentation
-2.0.5|[test_place.py](./tests/test_models/test_place.py)|Test place - Comproving expectect outputs and documentation
-2.0.6|[test_review.py](./tests/test_models/test_review.py)|Test Review - Comproving expectect outputs and documentation
-2.0.7|[test_state.py](./tests/test_models/test_state.py)|Test state - Comproving expectect outputs and documentation
-2.0.8|[test_user.py](./tests/test_models/test_user.py)|Test User - Comproving expectect outputs and documentation
+2.0.2|[test_amenity.py](./tests/test_models/test_amenity.py)|Testing Amenity class- Improving expected outputs and documentation
+2.0.3|[test_base_model.py](./tests/test_models/test_base_model.py)|Testing BaseModel- Improving expected outputs and documentation
+2.0.4|[test_city.py](./tests/test_models/test_city.py)|Test City Class - Improving expected outputs and documentation
+2.0.5|[test_place.py](./tests/test_models/test_place.py)|Test place - Improving expected outputs and documentation
+2.0.6|[test_review.py](./tests/test_models/test_review.py)|Test Review - Improving expected outputs and documentation
+2.0.7|[test_state.py](./tests/test_models/test_state.py)|Test state - Improving expected outputs and documentation
+2.0.8|[test_user.py](./tests/test_models/test_user.py)|Test User - Improving expected outputs and documentation
 
 #### 2.0.0.Test_engine structure
 
