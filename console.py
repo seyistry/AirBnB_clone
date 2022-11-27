@@ -154,6 +154,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def default(self, line):
+        """call class model methods with dot parameter
+        """
         arg = line.split(".")
         if arg[0] in classes.keys() and len(arg) > 1:
             # show method
