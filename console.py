@@ -5,7 +5,6 @@
 
 import cmd
 import json
-import sys
 import re
 from models.base_model import BaseModel
 from models.user import User
@@ -155,6 +154,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def default(self, line):
+        """call class model methods with dot parameter
+        """
         arg = line.split(".")
         if arg[0] in classes.keys() and len(arg) > 1:
             # show method
@@ -189,14 +190,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, arg):
         'Quit command to exit the program\n'
-        sys.exit()
+        return True
 
     def do_EOF(self, arg):
         'EOF command to exit the program\n'
-        sys.exit()
+        return True
 
     def emptyline(self):
-        return None
+        """overridden to not do nothing"""
+        pass
 
 
 if __name__ == '__main__':
