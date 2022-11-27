@@ -20,7 +20,7 @@ class ConsoleTest(unittest.TestCase):
         self.console = HBNBCommand()
 
     def test_docstrings(self):
-        """testing docstings"""
+        """testing docstrings"""
         self.assertIsNotNone(console.__doc__)
         self.assertIsNotNone(HBNBCommand.emptyline.__doc__)
         self.assertIsNotNone(HBNBCommand.do_quit.__doc__)
