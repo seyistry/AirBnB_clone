@@ -136,7 +136,6 @@ guillaume@ubuntu:~/AirBnB$
 0.5|destroy|```destroy <class name> <id number>```|```<class name>.destroy(<id>)```|Deletes an instance based on the class name and id (save the change into the JSON file)
 0.6|all|```all``` or ```all <class name>```|```<class name>.all()```|Prints all string representation of all instances based or not on the class name
 0.7|update|```update <class name> <id number> <attribute to update> "<new value of attribute>"```|simple form:```<class name>.update(<id>, <attribute name>, <attribute value>)``` update more than 1 attribute(using dictionaries): ```<class name>.update(<id>, <dictionary representation>)```|Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). If there are more commands, the command interpreter will only count the first attribute with its value
-0.8|count|```count <class name>```|```<class name>.count()```|retrieve the number of instances of a class
 
 ##|Allowed classes
 ---|---
