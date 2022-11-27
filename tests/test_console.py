@@ -171,7 +171,7 @@ class CreateTest(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all User")
             self.assertEqual(
-                            '["[User', f.getvalue()[:7])
+                '["[User', f.getvalue()[:7])
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create BaseModel")
         self.assertRegex(f.getvalue(), '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5]'
@@ -283,7 +283,8 @@ class ShowTest(unittest.TestCase):
         self.assertEqual(f.getvalue(), '*** Unknown syntax: ssss.all()\n')
         # with patch('sys.stdout', new=StringIO()) as f:
         #     HBNBCommand().onecmd("User.all(dasds)")
-        # self.assertEqual(f.getvalue(), '*** Unknown syntax: User.all(dasds)\n')
+        # self.assertEqual(f.getvalue(),
+        # '*** Unknown syntax: User.all(dasds)\n')
 
     def test_update(self):
         """Validate all both ways"""
