@@ -6,7 +6,6 @@
 import cmd
 import json
 import re
-import models
 from models.base_model import BaseModel
 from datetime import datetime
 from models.user import User
@@ -116,41 +115,46 @@ class HBNBCommand(cmd.Cmd):
                 list_all_objs.append(obj.__str__())
             print(list_all_objs)
 
-    def do_update(self, line):
-        """Updates an instance based on the class name and id
-            by adding or updating attribute
-            (save the change into the JSON file).
-            - Usage:
-            update <class name> <id> <attribute name> "<attribute value>"
-            - Ex:
-            $ update BaseModel 1234-1234-1234 email "aibnb@holbertonschool.com"
-            - Only one attribute can be updated at the time"""
-        cmd_line = line.split()
-        untouchable = ["id", "created_at", "updated_at"]
-        objects = models.storage.all()
-        if not line:
-            print("** class name missing **")
-        elif cmd_line[0] not in classes.keys():
-            print("** class doesn't exist **")
-        elif len(cmd_line) == 1:
-            print("** instance id missing **")
-        else:
-            instance = cmd_line[0] + "." + cmd_line[1]
-            if instance not in models.storage.all():
-                print("** no instance found **")
-            elif len(cmd_line) < 3:
-                print("** attribute name missing **")
-            elif len(cmd_line) < 4:
-                print("** value missing **")
-            elif cmd_line[2] not in untouchable:
-                ojb = objects[instance]
-                ojb.__dict__[cmd_line[2]] = cmd_line[3]
-                ojb.updated_at = datetime.now()
-                ojb.save()
+    def do_update(self, *args):
         """Updates an instance based on the class
            name and id by adding or updating attribute
         """
         # Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+
+        args_list = args[0].split(' ')
+        # print(args_list)
+        if len(args[0]) != 0:
+            if args_list[0] in classes.keys():
+                if len(args_list) > 1:
+                    # filename = self.__file_path
+                    try:
+                        objStr = f"{args_list[0]}.{args_list[1]}"
+                        with open("file.json", encoding="UTF8") as file:
+                            load = json.load(file)
+                        if objStr in load:
+                            if 2 < len(args_list):
+                                if 3 < len(args_list):
+                                    with open("file.json",
+                                              "w", encoding="UTF8") as file:
+                                        load[objStr][args_list[2]
+                                                     ] = args_list[3]
+                                        load[objStr]["updated_at"] = datetime.now().strftime(
+                                            "%Y-%m-%dT%H:%M:%S.%f")
+                                        json.dump(load, file)
+                                else:
+                                    print("** value missing **")
+                            else:
+                                print("** attribute name missing **")
+                        else:
+                            print("** no instance found **")
+                    except FileNotFoundError:
+                        pass
+                else:
+                    print("** instance id missing **")
+            else:
+                print("** class doesn't exist **")
+        else:
+            print("** class name missing **")
 
     def default(self, line):
         """call class model methods with dot parameter
